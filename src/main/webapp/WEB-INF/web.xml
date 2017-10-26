@@ -6,12 +6,12 @@
 
     <servlet>
         <servlet-name>ToDo</servlet-name>
-        <servlet-class>main.java.ToDoServlet</servlet-class>
+        <servlet-class>todo.ToDoServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>ToDo</servlet-name>
-        <url-pattern>/todo</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 

@@ -1,4 +1,4 @@
-package main.java;
+package todo;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,13 +17,13 @@ public class ToDoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("points",points);
-        req.getRequestDispatcher("/index.jsp").forward(req,resp);
+        req.getRequestDispatcher("/todo-list.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         points.add(req.getParameter("point"));
-        resp.sendRedirect("/todo");
+        resp.sendRedirect("/");
     }
 
 }

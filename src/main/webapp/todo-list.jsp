@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>ToDo List</h1>
-<form action="todo" method="post">
+<form action="/" method="post">
   <input type="text" name="point">
   <input type="submit" value="submit">
 </form>
