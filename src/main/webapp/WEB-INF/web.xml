@@ -11,7 +11,7 @@
 
     <servlet-mapping>
         <servlet-name>ToDo</servlet-name>
-        <url-pattern>/todo</url-pattern>
+        <url-pattern>/api/todo</url-pattern>
     </servlet-mapping>
 
 

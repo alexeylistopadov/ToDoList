@@ -1,7 +1,5 @@
 package todo;
 
-
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
@@ -19,33 +17,20 @@ public class ToDoServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         points = new ArrayList<ToDoPoint>();
-    }
-
-    @Override
-    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            resp.addHeader("Access-Control-Allow-Origin", "*");
-            resp.addHeader("Access-Control-Allow-Methods", "GET, PUT, POST, OPTIONS, DELETE");
-            resp.addHeader("Access-Control-Allow-Headers", "Content-Type");
-            resp.addHeader("Access-Control-Max-Age", "86400");
+        points.add(new ToDoPoint("content", true, true));
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", "*");
         ObjectMapper mapper = new ObjectMapper();
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("utf-8");
         PrintWriter out = resp.getWriter();
         out.print(mapper.writeValueAsString(points));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Access-Control-Allow-Origin", "*");
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode todo = mapper.readValue(req.getReader().readLine(), JsonNode.class);
-        points.add(new ToDoPoint(todo.get("content").asText(),todo.get("workTag").asBoolean(),todo.get("emergencyTag").asBoolean()));
+        points.add(mapper.reader().forType(ToDoPoint.class).<ToDoPoint>readValue(req.getReader().readLine()));
     }
-
 }
 

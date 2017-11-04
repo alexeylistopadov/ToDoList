@@ -5,6 +5,9 @@ public class ToDoPoint {
     private boolean workTag;
     private boolean emergencyTag;
 
+    public ToDoPoint() {
+    }
+
     public ToDoPoint(String content, boolean workTag, boolean emergencyTag) {
         this.content = content;
         this.workTag = workTag;
