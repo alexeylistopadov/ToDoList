@@ -1,17 +1,18 @@
 package todo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ToDoPoint {
     private String content;
-    private boolean workTag;
-    private boolean emergencyTag;
+    private List<String> tags;
 
     public ToDoPoint() {
     }
 
-    public ToDoPoint(String content, boolean workTag, boolean emergencyTag) {
+    public ToDoPoint(String content, ArrayList<String> tags) {
         this.content = content;
-        this.workTag = workTag;
-        this.emergencyTag = emergencyTag;
+        this.tags = tags;
     }
 
     public String getContent() {
@@ -22,20 +23,12 @@ public class ToDoPoint {
         this.content = content;
     }
 
-    public boolean isWorkTag() {
-        return workTag;
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setWorkTag(boolean workTag) {
-        this.workTag = workTag;
-    }
-
-    public boolean isEmergencyTag() {
-        return emergencyTag;
-    }
-
-    public void setEmergencyTag(boolean emergencyTag) {
-        this.emergencyTag = emergencyTag;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
 }

@@ -13,23 +13,22 @@ import java.util.List;
 
 public class ToDoServlet extends HttpServlet {
     private List<ToDoPoint> points;
+    private ObjectMapper mapper;
 
     @Override
     public void init() throws ServletException {
         points = new ArrayList<ToDoPoint>();
-        points.add(new ToDoPoint("content", true, true));
+        mapper = new ObjectMapper();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
         PrintWriter out = resp.getWriter();
         out.print(mapper.writeValueAsString(points));
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ObjectMapper mapper = new ObjectMapper();
         points.add(mapper.reader().forType(ToDoPoint.class).<ToDoPoint>readValue(req.getReader().readLine()));
     }
 }
