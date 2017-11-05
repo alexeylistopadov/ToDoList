@@ -3,17 +3,17 @@ package todo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoPoint {
+public class TodoPoint {
     private static Long nextId = 1L;
 
     private Long id = nextId++;
     private String content;
     private List<String> tags = new ArrayList<>();
 
-    public ToDoPoint() {
+    public TodoPoint() {
     }
 
-    public ToDoPoint(String content, List<String> tags) {
+    public TodoPoint(String content, List<String> tags) {
         this.content = content;
         this.tags = tags;
     }

@@ -5,12 +5,12 @@
          version="3.1">
 
     <servlet>
-        <servlet-name>ToDo</servlet-name>
-        <servlet-class>todo.ToDoServlet</servlet-class>
+        <servlet-name>Todo</servlet-name>
+        <servlet-class>todo.TodoServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>ToDo</servlet-name>
+        <servlet-name>Todo</servlet-name>
         <url-pattern>/api/todo</url-pattern>
     </servlet-mapping>
 
