@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoPoint {
-    private static Long nextId = 1L;
 
-    private Long id = nextId++;
+    private Long id;
     private String content;
     private List<String> tags = new ArrayList<>();
 
@@ -20,6 +19,10 @@ public class TodoPoint {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getContent() {
