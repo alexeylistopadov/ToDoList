@@ -5,12 +5,12 @@ import java.util.List;
 
 public class ToDoPoint {
     private String content;
-    private List<String> tags;
+    private List<String> tags = new ArrayList<>();
 
     public ToDoPoint() {
     }
 
-    public ToDoPoint(String content, ArrayList<String> tags) {
+    public ToDoPoint(String content, List<String> tags) {
         this.content = content;
         this.tags = tags;
     }
