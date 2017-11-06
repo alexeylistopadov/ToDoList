@@ -17,10 +17,15 @@ import java.util.stream.Collectors;
 
 @WebServlet(name = "todos", urlPatterns = {"/api/todos/*"})
 public class TodoServlet extends HttpServlet {
+
     public static final String APPLICATION_JSON = "application/json";
 
-    private ObjectMapper mapper = new ObjectMapper();
-    private TodoService todoService = new TodoService();
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final TodoService todoService;
+
+    public TodoServlet(TodoService todoService) {
+        this.todoService = todoService;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
