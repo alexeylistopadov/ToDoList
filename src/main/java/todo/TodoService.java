@@ -23,7 +23,7 @@ public class TodoService {
         return points.stream()
                 .filter(todoPoint -> todoPoint.getId().equals(id))
                 .findFirst()
-                .orElse(null);
+                .get();
     }
 
     public List<TodoPoint> getPoints() {
@@ -37,11 +37,19 @@ public class TodoService {
                 .ifPresent(p -> points.set(points.indexOf(p), point));
     }
 
+    public void patchPoint(Long pointId,TodoPoint point) throws IllegalAccessException {
+        TodoPoint todoPoint = getPointById(pointId);
+        if(point.getContent() != null){
+            todoPoint.setContent(point.getContent());
+        }
+        if (!point.getTags().isEmpty()){
+            todoPoint.setTags(point.getTags());
+        }
+    }
+
     public void deletePoint(Long id) {
         points = points.stream()
                 .filter(todoPoint -> !todoPoint.getId().equals(id))
                 .collect(Collectors.toList());
     }
-
-
 }

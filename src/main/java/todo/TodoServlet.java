@@ -7,7 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(name = "todos", urlPatterns = {"/api/todos/*"})
 public class TodoServlet extends HttpServlet {
@@ -20,6 +22,40 @@ public class TodoServlet extends HttpServlet {
     public TodoServlet(TodoService todoService) {
         this.todoService = todoService;
     }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String method = req.getMethod();
+
+        if (Objects.equals(method, "PATCH")) {
+            doPatch(req, resp);
+        } else if (Objects.equals(method, "GET")) {
+            doGet(req, resp);
+        } else if (Objects.equals(method, "POST")) {
+            doPost(req, resp);
+        } else if (Objects.equals(method, "PUT")) {
+            doPut(req, resp);
+        } else if (Objects.equals(method, "DELETE")) {
+            doDelete(req, resp);
+        } else {
+            resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
+        }
+    }
+
+    protected void doPatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getPathInfo() == null) {
+            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+        try {
+            TodoPoint point = mapper.readValue(req.getInputStream(), TodoPoint.class);
+            todoService.patchPoint(Long.parseLong(req.getPathInfo().substring(1)), point);
+            resp.setStatus(HttpServletResponse.SC_OK);
+        } catch (IllegalStateException | IllegalAccessException e) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,14 +74,12 @@ public class TodoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType(APPLICATION_JSON);
         TodoPoint point = mapper.readValue(req.getInputStream(), TodoPoint.class);
         todoService.addPoint(point);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType(APPLICATION_JSON);
         todoService.updatePoint(mapper.readValue(req.getInputStream(), TodoPoint.class));
         resp.setStatus(HttpServletResponse.SC_ACCEPTED);
     }
