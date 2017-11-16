@@ -27,18 +27,10 @@ public class TodoServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getMethod();
 
-        if (Objects.equals(method, "PATCH")) {
+        if (Objects.equals(method, "PATCH")){
             doPatch(req, resp);
-        } else if (Objects.equals(method, "GET")) {
-            doGet(req, resp);
-        } else if (Objects.equals(method, "POST")) {
-            doPost(req, resp);
-        } else if (Objects.equals(method, "PUT")) {
-            doPut(req, resp);
-        } else if (Objects.equals(method, "DELETE")) {
-            doDelete(req, resp);
         } else {
-            resp.setStatus(HttpServletResponse.SC_NOT_IMPLEMENTED);
+            super.service(req,resp);
         }
     }
 
