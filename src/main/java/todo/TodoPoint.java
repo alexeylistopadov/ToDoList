@@ -12,7 +12,8 @@ public class TodoPoint {
     public TodoPoint() {
     }
 
-    public TodoPoint(String content, List<String> tags) {
+    public TodoPoint(Long id, String content, List<String> tags) {
+        this.id = id;
         this.content = content;
         this.tags = tags;
     }
