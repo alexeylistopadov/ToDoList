@@ -9,34 +9,34 @@ import java.util.List;
 
 public class TodoService {
 
-    TodoDatabaseService todoDatabaseService;
+    TodoDAO todoDAO;
 
 
-    public TodoService(TodoDatabaseService todoDatabaseService) {
-        this.todoDatabaseService = todoDatabaseService;
+    public TodoService(TodoDAO todoDAO) {
+        this.todoDAO = todoDAO;
     }
 
     public void addPoint(TodoPoint todoPoint) throws SQLException, IOException {
-        todoDatabaseService.addPoint(todoPoint);
+        todoDAO.addPoint(todoPoint);
     }
 
     public TodoPoint getPointById(Long id) throws SQLException, IOException {
-        return todoDatabaseService.getPoint(id);
+        return todoDAO.getPoint(id);
     }
 
     public List<TodoPoint> getPoints() throws SQLException, IOException {
-        return Collections.unmodifiableList(todoDatabaseService.getPoints());
+        return Collections.unmodifiableList(todoDAO.getPoints());
     }
 
     public void updatePoint(TodoPoint point) throws IOException, SQLException {
-        todoDatabaseService.updatePoint(point);
+        todoDAO.updatePoint(point);
     }
 
     public void patchPoint(Long pointId,TodoPoint point) throws IllegalAccessException, SQLException {
-        todoDatabaseService.patchPoint(pointId,point);
+        todoDAO.patchPoint(pointId,point);
     }
 
     public void deletePoint(Long id) throws SQLException {
-        todoDatabaseService.deletePoint(id);
+        todoDAO.deletePoint(id);
     }
 }

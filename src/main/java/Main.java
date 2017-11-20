@@ -2,7 +2,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import todo.services.TodoService;
-import todo.services.TodoDatabaseService;
+import todo.services.TodoDAO;
 import todo.TodoServlet;
 
 
@@ -14,10 +14,10 @@ public class Main {
         context.setContextPath("/");
         server.setHandler(context);
 
-        TodoDatabaseService todoDatabaseService = new TodoDatabaseService();
-        todoDatabaseService.connect();
+        TodoDAO todoDAO = new TodoDAO();
+        todoDAO.connect();
 
-        TodoService todoService = new TodoService(todoDatabaseService);
+        TodoService todoService = new TodoService(todoDAO);
 
         ServletHolder todoServletHolder = new ServletHolder(new TodoServlet(todoService));
         context.addServlet(todoServletHolder,"/api/todos/*");
